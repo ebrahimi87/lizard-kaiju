@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><title>Lizard Kaiju CC0 model library</title>
+<style>
+body { margin: 0; background: #e8f1e4; color: #254237; font: 14px system-ui; }
+h1 { font-size: 24px; margin: 18px 24px 4px; }
+p { margin: 0 24px 16px; }
+#grid { display: grid; grid-template-columns: repeat(4, 1fr); position: relative; }
+.tile { height: 250px; position: relative; border: 1px solid #c4d8bd; box-sizing: border-box; }
+.label { position: absolute; bottom: 8px; left: 12px; right: 6px; font-weight: 650; }
+.label small { display: block; font-size: 11px; font-weight: 400; }
+canvas { position: absolute; top: 0; left: 0; pointer-events: none; }
+</style>
+<script type="importmap">{"imports":{"three":"../../vendor/three.module.js","three/addons/":"../../vendor/addons/"}}</script>
+</head>
+<body>
+<h1 id="title">CC0 model library</h1>
+<p>Warm toy lighting · each tile fits its model · animated models shown in motion · front = +Z</p>
+<div id="grid"></div>
+<script type="module">
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+
+const category = new URLSearchParams(location.search).get('category') || 'garden';
+document.querySelector('#title').textContent = `Lizard Kaiju — ${category}`;
+const manifest = await fetch('../../assets/models/manifest.json').then(response => response.json());
+const entries = manifest.filter(entry => entry.path.startsWith(category + '/'));
+const grid = document.querySelector('#grid');
+const loader = new GLTFLoader();
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+renderer.setPixelRatio(1);
+renderer.setSize(innerWidth, Math.ceil(entries.length / 4) * 250);
+renderer.setScissorTest(true);
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.15;
+grid.append(renderer.domElement);
+const tiles = [];
+window.assetStats = [];
+
+function poseValues(root) {
+  const values = [];
+  root.traverse(object => {
+    values.push(...object.position.toArray(), ...object.quaternion.toArray(), ...object.scale.toArray());
+  });
+  return values;
+}
+
+for (const entry of entries) {
+  const tile = document.createElement('div');
+  tile.className = 'tile';
+  const label = document.createElement('div');
+  label.className = 'label';
+  tile.append(label);
+  grid.append(tile);
+  const gltf = await loader.loadAsync('../../assets/models/' + entry.path);
+  const root = gltf.scene;
+  root.updateMatrixWorld(true);
+  const box = new THREE.Box3().setFromObject(root, true);
+  if (![...box.min.toArray(), ...box.max.toArray()].every(Number.isFinite)) throw new Error(`Invalid bounds: ${entry.path}`);
+  const size = box.getSize(new THREE.Vector3());
+  const center = box.getCenter(new THREE.Vector3());
+  const textures = [];
+  root.traverse(object => {
+    if (!object.isMesh) return;
+    for (const material of Array.isArray(object.material) ? object.material : [object.material]) {
+      for (const key of ['map', 'normalMap', 'emissiveMap', 'roughnessMap', 'metalnessMap']) {
+        const image = material[key]?.image;
+        if (image) textures.push([image.width, image.height]);
+      }
+    }
+  });
+  const mixer = new THREE.AnimationMixer(root);
+  const checks = [];
+  for (const clip of gltf.animations) {
+    mixer.stopAllAction();
+    const action = mixer.clipAction(clip).play();
+    mixer.setTime(0);
+    const first = poseValues(root);
+    mixer.setTime(clip.duration * 0.37);
+    const second = poseValues(root);
+    const moving = first.some((value, index) => Math.abs(value - second[index]) > 0.00001);
+    checks.push({ name: clip.name, duration: clip.duration, tracks: clip.tracks.length, moving });
+    action.stop();
+  }
+  mixer.stopAllAction();
+  const previewClip = ['Run', 'Running', 'Gallop', 'Walk', 'Walking', 'Swim', 'Flying', 'Fast_Flying', 'Idle', 'Jump'].map(name => gltf.animations.find(clip => clip.name === name)).find(Boolean) || gltf.animations[0];
+  if (previewClip) {
+    mixer.clipAction(previewClip).play();
+    mixer.setTime(previewClip.duration * 0.37);
+  }
+  window.assetStats.push({ path: entry.path, min: box.min.toArray(), max: box.max.toArray(), size: size.toArray(), textures, checks });
+  const displayBox = box.clone();
+  if (previewClip) {
+    root.updateMatrixWorld(true);
+    displayBox.union(new THREE.Box3().setFromObject(root, true));
+    mixer.setTime(0.7);
+    root.updateMatrixWorld(true);
+    displayBox.union(new THREE.Box3().setFromObject(root, true));
+    mixer.setTime(previewClip.duration * 0.37);
+  }
+  const displaySize = displayBox.getSize(new THREE.Vector3());
+  const displayCenter = displayBox.getCenter(new THREE.Vector3());
+  const span = Math.max(displaySize.x, displaySize.y, displaySize.z, 0.01) * 1.15;
+  const presentation = new THREE.Group();
+  presentation.add(root);
+  presentation.scale.setScalar(2 / span);
+  root.position.sub(displayCenter);
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color('#e8f1e4');
+  scene.add(presentation);
+  scene.add(new THREE.HemisphereLight(0xfff8df, 0x77937b, 1.7));
+  const sun = new THREE.DirectionalLight(0xffedc5, 2.5);
+  sun.position.set(-3, 6, 5);
+  scene.add(sun);
+  const fill = new THREE.DirectionalLight(0xd8eaff, 0.8);
+  fill.position.set(4, 2, -3);
+  scene.add(fill);
+  const ground = new THREE.Mesh(new THREE.CircleGeometry(1.25, 48), new THREE.MeshStandardMaterial({color: 0xd4e5cb, roughness: 1}));
+  ground.rotation.x = -Math.PI / 2;
+  ground.position.y = (box.min.y - displayCenter.y) * 2 / span - 0.035;
+  scene.add(ground);
+  const camera = new THREE.OrthographicCamera(-1.55, 1.55, 1.35, -1.35, 0.1, 30);
+  camera.position.set(3, 2.3, 4);
+  camera.lookAt(0, 0, 0);
+  label.textContent = entry.name;
+  const small = document.createElement('small');
+  small.textContent = `${entry.triangles} triangles${previewClip ? ' · ' + previewClip.name + ' at 37%' : ' · static'}`;
+  label.append(small);
+  tiles.push({tile, scene, camera, mixer, previewClip});
+}
+
+window.renderAssets = (time = null) => {
+  const gridBox = grid.getBoundingClientRect();
+  for (const item of tiles) {
+    if (time !== null && item.previewClip) item.mixer.setTime(time);
+    const rect = item.tile.getBoundingClientRect();
+    const left = rect.left - gridBox.left;
+    const bottom = gridBox.height - (rect.bottom - gridBox.top) + 35;
+    renderer.setViewport(left, bottom, rect.width, rect.height - 35);
+    renderer.setScissor(left, bottom, rect.width, rect.height - 35);
+    renderer.render(item.scene, item.camera);
+  }
+};
+window.renderAssets();
+window.assetsReady = true;
+</script>
+</body>
+</html>

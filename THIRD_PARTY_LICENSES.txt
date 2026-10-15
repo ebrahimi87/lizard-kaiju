@@ -1,0 +1,129 @@
+THREE.JS — MIT
+Source: https://github.com/mrdoob/three.js
+
+The MIT License
+
+Copyright © 2010-2025 three.js authors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+
+CC0 3D MODEL ASSETS — Lizard Kaiju
+All entries below are CC0 1.0 Universal / public domain.
+License text: https://creativecommons.org/publicdomain/zero/1.0/
+Source-page licenses checked on 2026-10-14. Kenney pack pages state Creative Commons CC0; each Poly Pizza model page states Public Domain (CC0).
+Kenney pack author: Kenney (https://kenney.nl/). Other authors are identified in each entry below.
+Models were selected, embedded, rescaled, recolored, and clip names shortened. Crab skin weights were repaired. No source download scripts were executed.
+
+Exceptional_3D — Ladybird
+  Source and license evidence: https://poly.pizza/m/3tCnJC9UYA
+  License: CC0 1.0 Universal
+Kenney car-kit
+  Source and license evidence: https://kenney.nl/assets/car-kit
+  License: CC0 1.0 Universal
+Kenney city-kit-commercial
+  Source and license evidence: https://kenney.nl/assets/city-kit-commercial
+  License: CC0 1.0 Universal
+Kenney city-kit-roads
+  Source and license evidence: https://kenney.nl/assets/city-kit-roads
+  License: CC0 1.0 Universal
+Kenney city-kit-suburban
+  Source and license evidence: https://kenney.nl/assets/city-kit-suburban
+  License: CC0 1.0 Universal
+Kenney nature-kit
+  Source and license evidence: https://kenney.nl/assets/nature-kit
+  License: CC0 1.0 Universal
+Kenney survival-kit
+  Source and license evidence: https://kenney.nl/assets/survival-kit
+  License: CC0 1.0 Universal
+Quaternius — Animated Robot
+  Source and license evidence: https://poly.pizza/m/QCm7qe9uNJ
+  License: CC0 1.0 Universal
+Quaternius — Bee
+  Source and license evidence: https://poly.pizza/m/HvfIku26CK
+  License: CC0 1.0 Universal
+Quaternius — Big Crystal
+  Source and license evidence: https://poly.pizza/m/pf5lzmgr2J
+  License: CC0 1.0 Universal
+Quaternius — Casual Character
+  Source and license evidence: https://poly.pizza/m/kZ3DmIoGip
+  License: CC0 1.0 Universal
+Quaternius — Cat
+  Source and license evidence: https://poly.pizza/m/2f54vbV0In
+  License: CC0 1.0 Universal
+Quaternius — Cat
+  Source and license evidence: https://poly.pizza/m/qKICY6xla2
+  License: CC0 1.0 Universal
+Quaternius — Chicken
+  Source and license evidence: https://poly.pizza/m/Z3RCoCYss4
+  License: CC0 1.0 Universal
+Quaternius — Crab Enemy
+  Source and license evidence: https://poly.pizza/m/Gs3yfsV5lB
+  License: CC0 1.0 Universal
+Quaternius — Dragon
+  Source and license evidence: https://poly.pizza/m/VBvzjFIYws
+  License: CC0 1.0 Universal
+Quaternius — Farmer
+  Source and license evidence: https://poly.pizza/m/7pn3R6hPvE
+  License: CC0 1.0 Universal
+Quaternius — Fern
+  Source and license evidence: https://poly.pizza/m/jqcanvH7D6
+  License: CC0 1.0 Universal
+Quaternius — Fish
+  Source and license evidence: https://poly.pizza/m/BEcU9rjiAq
+  License: CC0 1.0 Universal
+Quaternius — Frog
+  Source and license evidence: https://poly.pizza/m/9Z2V8fpazF
+  License: CC0 1.0 Universal
+Quaternius — Gem Pink
+  Source and license evidence: https://poly.pizza/m/PJnKvWluqs
+  License: CC0 1.0 Universal
+Quaternius — Horse
+  Source and license evidence: https://poly.pizza/m/qvTrSG9pZF
+  License: CC0 1.0 Universal
+Quaternius — Mech
+  Source and license evidence: https://poly.pizza/m/o3Ps8z8ByP
+  License: CC0 1.0 Universal
+Quaternius — Rat
+  Source and license evidence: https://poly.pizza/m/iltq5bVNaV
+  License: CC0 1.0 Universal
+Quaternius — Shiba Inu
+  Source and license evidence: https://poly.pizza/m/y4wdQpg767
+  License: CC0 1.0 Universal
+Quaternius — Spider
+  Source and license evidence: https://poly.pizza/m/yRYJiAJyiM
+  License: CC0 1.0 Universal
+Quaternius — T-Rex
+  Source and license evidence: https://poly.pizza/m/UYtneO5FpF
+  License: CC0 1.0 Universal
+Quaternius — Velociraptor
+  Source and license evidence: https://poly.pizza/m/cnlGH2UcDd
+  License: CC0 1.0 Universal
+iPoly3D — Cage
+  Source and license evidence: https://poly.pizza/m/WcrsIHK2A3
+  License: CC0 1.0 Universal
+kazuma — Helicopter
+  Source and license evidence: https://poly.pizza/m/EQJ2MECUbx
+  License: CC0 1.0 Universal
+
+Related original Quaternius pack pages (CC0; Google Drive data downloads were quota-limited, so the individual Poly Pizza mirrors above were used):
+https://quaternius.com/packs/ultimateanimatedanimals.html
+https://quaternius.com/packs/ultimatedanimatedcharacter.html
+https://quaternius.com/packs/animateddinosaurs.html
+https://quaternius.com/packs/animatedrobot.html
+https://quaternius.com/packs/ultimatemonsters.html

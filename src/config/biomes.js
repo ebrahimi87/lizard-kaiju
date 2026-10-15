@@ -1,0 +1,56 @@
+// Look and feel per stage. Colors are sRGB hex. sunDirection points from the ground
+// toward the sun.
+
+export const BIOMES = {
+  garden: {
+    id: "garden",
+    skyTop: "#5fb6ff",
+    skyHorizon: "#cdeeff",
+    skyBottom: "#9fd47a",
+    sunColor: "#fff1d2",
+    sunIntensity: 2.6,
+    sunDirection: { x: -0.55, y: 1, z: 0.65 },
+    skyLight: "#cfe9ff",
+    groundLight: "#6a8f3a",
+    hemisphereIntensity: 1.1,
+    environmentIntensity: 0.35,
+    grassDark: "#4f9a36",
+    grassLight: "#86c04a",
+    grassTint: "#e3f58a",
+    grassHeight: 0.2,
+    dirt: "#c79a62",
+    dirtAmount: 0.8,
+    lawnStripes: 1,
+  },
+  jungle: {
+    id: "jungle", skyTop: "#42b9c7", skyHorizon: "#d2eed0", skyBottom: "#528c43",
+    sunColor: "#fff0b0", sunIntensity: 2.8, sunDirection: { x: -0.7, y: 1, z: 0.4 },
+    skyLight: "#c4efdd", groundLight: "#50782e", hemisphereIntensity: 1.2, environmentIntensity: 0.35,
+    grassDark: "#39864a", grassLight: "#70b54e", grassTint: "#b9ed69", grassHeight: 0.26,
+    dirt: "#b99a60", dirtAmount: 0.22, lawnStripes: 0, trail: true,
+  },
+  swamp: {
+    id: "swamp", skyTop: "#78b9bd", skyHorizon: "#d7e7c5", skyBottom: "#6d9781",
+    sunColor: "#ffe4a2", sunIntensity: 2.5, sunDirection: { x: -0.8, y: 0.8, z: 0.5 },
+    skyLight: "#c7eee1", groundLight: "#60816a", hemisphereIntensity: 1.25, environmentIntensity: 0.4,
+    grassDark: "#526f45", grassLight: "#91aa63", grassTint: "#c7e5a7", grassHeight: 0.16,
+    dirt: "#a39360", dirtAmount: 0.35, lawnStripes: 0, grassDensity: 0.5,
+    fogNear: 38, fogFar: 135, waterColor: "#268d83", waterHighlight: "#9fe6b8",
+  },
+  volcano: {
+    id: "volcano", skyTop: "#8d7fba", skyHorizon: "#ffc59c", skyBottom: "#a66b68",
+    sunColor: "#ffd1a1", sunIntensity: 2.4, sunDirection: { x: -0.6, y: 0.85, z: 0.65 },
+    skyLight: "#e1d4ed", groundLight: "#8b6377", hemisphereIntensity: 1.4, environmentIntensity: 0.45,
+    grassDark: "#3b2c33", grassLight: "#5e4346", grassTint: "#ffffff", grassHeight: 0.1,
+    dirt: "#7a5844", dirtAmount: 0.45, lawnStripes: 0, grassDensity: 0, volcanic: true,
+    lavaColor: "#ff6d13", lavaHighlight: "#ffc450", lavaIntensity: 6.5,
+  },
+  city: {
+    id: "city", skyTop: "#bd91cf", skyHorizon: "#ffd1ab", skyBottom: "#6cb1b8",
+    sunColor: "#ffd1a1", sunIntensity: 2.5, sunDirection: { x: -0.7, y: 0.7, z: 0.6 },
+    skyLight: "#f4dbe8", groundLight: "#8b8a9e", hemisphereIntensity: 1.35, environmentIntensity: 0.4,
+    grassDark: "#c5b6a8", grassLight: "#dfcdb7", grassTint: "#ffffff", grassHeight: 0.1,
+    dirt: "#bca59b", dirtAmount: 0.1, lawnStripes: 0, grassDensity: 0,
+    roads: true, roadColor: "#697182", waterColor: "#489cae", waterHighlight: "#f4c4ae",
+  },
+};

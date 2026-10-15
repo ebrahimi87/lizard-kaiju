@@ -1,0 +1,20 @@
+{
+  "name": "lizard-kaiju",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "serve": "node tests/helpers/static-server.mjs",
+    "syntax": "node tests/helpers/check-syntax.mjs",
+    "logic": "node --test tests/logic/*.test.js",
+    "browser": "playwright test -c tests/playwright.config.js",
+    "browser:webkit": "WEBKIT=1 playwright test -c tests/playwright.config.js --project=ipad-webkit",
+    "playtest": "node tools/playtest.mjs",
+    "tour": "node tools/stagetour.mjs",
+    "icons": "node tools/make-icons.mjs",
+    "validate": "npm run syntax && npm run logic && npm run browser"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.62.1"
+  }
+}
