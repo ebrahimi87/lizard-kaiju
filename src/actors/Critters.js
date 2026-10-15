@@ -1,5 +1,6 @@
 import * as THREE from "three";
 import { createCritterModel } from "./critters/CritterModels.js";
+import { GlowSpots, updatePreyGlow } from "./critters/PreyGlow.js";
 
 // Prey critters: spawning around the player, wandering, fleeing (always slower than the
 // lizard), getting dizzy from fire or pushed by water, and being eaten.
@@ -25,6 +26,8 @@ export class CritterSystem {
     this.random = random;
     this.list = [];
     this.temp = new THREE.Vector3();
+    this.spots = new GlowSpots(scene, 40);
+    this.spotItems = [];
   }
 
   clear() {
@@ -82,6 +85,8 @@ export class CritterSystem {
   // Returns how many critters still need spawning to reach the stage's target count.
   update(dt, stage, world, player, frozen) {
     const table = stage.critters;
+    this.time = (this.time ?? 0) + dt;
+    updatePreyGlow(this.time);
     for (let i = this.list.length - 1; i >= 0; i -= 1) {
       const critter = this.list[i];
       critter.age += dt;
@@ -102,6 +107,21 @@ export class CritterSystem {
       let missing = table.alive - this.list.length;
       while (missing > 0 && this.spawn(stage, world, player)) missing -= 1;
     }
+    this.updateSpots();
+  }
+
+  updateSpots() {
+    const items = this.spotItems;
+    items.length = this.list.length;
+    this.list.forEach((critter, index) => {
+      const item = (items[index] ??= {});
+      item.position = critter.position;
+      item.radius = critter.radius;
+      item.shiny = critter.shiny;
+      item.phase = critter.position.x * 1.7;
+      item.size = critter.eaten > 0 ? 0 : Math.min(1, critter.age / SPAWN_POP);
+    });
+    this.spots.update(items, this.time);
   }
 
   think(dt, critter, stage, world, player) {

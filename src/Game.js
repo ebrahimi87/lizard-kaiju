@@ -162,7 +162,9 @@ export class Game {
     this.netDome.group.visible = false;
     this.scene.add(this.netDome.group);
     this.egg = new MysteryEgg(this.scene, this.particles, this.sound);
-    this.egg.place(-1.2 * (this.stage.camera.height / 6.4), 3 * (this.stage.camera.height / 6.4), FLOWER_SIZE[index]);
+    // Off to the side of the start, small enough not to block the view ahead.
+    const reach = this.stage.camera.height / 6.4;
+    this.egg.place(-2.2 * reach, 3.2 * reach, FLOWER_SIZE[index] * 0.7);
     this.resetStageState();
     for (const kind of this.perks.buddies) this.buddies.addFreed(kind, this.temp.set(-1.5, 0, -2));
     this.camera.fov = this.stage.camera.fov;
@@ -1113,7 +1115,7 @@ export class Game {
       list.push({ id: kind, image: this.thumb(`buddy-${kind}`, () => createBuddyModel(kind).group, { yaw: 0.6 }), collected: Boolean(stickers[kind]) });
     }
     for (const kind of CRITTER_KINDS) {
-      list.push({ id: kind, image: this.thumb(`critter-${kind}`, () => createCritterModel(kind).group, { yaw: 0.7 }), collected: Boolean(stickers[kind]), gold: Boolean(stickers[`${kind}-gold`]) });
+      list.push({ id: kind, image: this.thumb(`critter-${kind}`, () => createCritterModel(kind, { glow: false }).group, { yaw: 0.7 }), collected: Boolean(stickers[kind]), gold: Boolean(stickers[`${kind}-gold`]) });
     }
     list.push({ id: "trophy", image: trophyImage(), collected: Boolean(stickers.trophy) });
     this.book.open(list);

@@ -17,6 +17,7 @@ import {
 } from "./CritterParts.js";
 import { createBuddyModel, BUDDY_KINDS } from "./BuddyModels.js";
 import { createCageModel } from "./CageModel.js";
+import { addPreyGlow } from "./PreyGlow.js";
 
 // Procedural prey critters in the same toy style as the lizard. Every model:
 //   { group, radius, height, update(dt, { speed, state, time }), dispose() }
@@ -679,6 +680,9 @@ const BUILDERS = {
   drone: createDrone,
 };
 
-export function createCritterModel(kind, { shiny = false } = {}) {
-  return BUILDERS[kind](shiny);
+// glow: the faint food outline (off for sticker-book pictures).
+export function createCritterModel(kind, { shiny = false, glow = true } = {}) {
+  const model = BUILDERS[kind](shiny);
+  if (glow) addPreyGlow(model.group);
+  return model;
 }
